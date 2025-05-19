@@ -1,0 +1,20 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "(DX) by providing common configurations for TypeScript, ESLint, Prettier, and automated Git hooks for formatting and linting.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dx-box/common.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dx-box/common/issues"
+  },
+  "homepage": "https://github.com/dx-box/common#readme"
+}
