@@ -1,20 +1,30 @@
 {
-  "name": "common",
+  "name": "@dx-box/common",
   "version": "1.0.0",
   "description": "(DX) by providing common configurations for TypeScript, ESLint, Prettier, and automated Git hooks for formatting and linting.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "dx.config.ts"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "postinstall": "node scripts/postinstall.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dx-box/common.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "dx-box",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dx-box/common/issues"
   },
-  "homepage": "https://github.com/dx-box/common#readme"
+  "homepage": "https://github.com/dx-box/common#readme",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
 }
