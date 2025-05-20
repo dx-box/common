@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs, { chmodSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -50,6 +50,7 @@ git update-index --again
 
     fs.mkdirSync(path.dirname(hookPath), { recursive: true });
     fs.writeFileSync(hookPath, hookContent.trimStart(), { mode: 0o755 });
+    chmodSync(hookPath, 0o755);
     console.log('✅ Husky pre-commit hook 생성됨');
   } catch (e) {
     console.error('❌ Husky 설정 실패:', e.message);
