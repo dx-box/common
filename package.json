@@ -14,7 +14,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "postinstall": "tsx scripts/postinstall.js"
+    "postinstall": "tsx scripts/postinstall.js",
+    "dx-lint": "eslint . --ext .ts,.tsx,.js --fix",
+    "dx-format": "prettier --write \"**/*.{ts,tsx,js,json,md}\""
   },
   "repository": {
     "type": "git",
@@ -29,7 +31,11 @@
   "homepage": "https://github.com/dx-box/common#readme",
   "devDependencies": {
     "@types/node": "^22.15.19",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
     "deepmerge": "^4.3.1",
+    "eslint": "^9.27.0",
+    "husky": "^9.1.7",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }

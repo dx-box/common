@@ -7,7 +7,7 @@ export const mergeAndWrite = async (
   basePath: string,
   targetPath: string,
   userConfig: Record<string, any> = {},
-  isJSON: boolean = true,
+  isJSON: boolean = true
 ) => {
   const baseModule = await import(pathToFileURL(basePath).toString());
   const baseConfig = baseModule.default || baseModule;

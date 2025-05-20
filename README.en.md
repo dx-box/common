@@ -1,6 +1,7 @@
 # @dx-box/common
 
-`@dx-box/common` is a utility package that improves developer experience (DX) by providing common configurations for TypeScript, ESLint, Prettier, and automated Git hooks for formatting and linting.
+`@dx-box/common` is a utility package that improves developer experience (DX) by providing common configurations for
+TypeScript, ESLint, Prettier, and automated Git hooks for formatting and linting.
 
 ---
 

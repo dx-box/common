@@ -1,0 +1,5 @@
+#!/bin/sh
+
+npm run dx-lint
+npm run dx-format
+git update-index --again
