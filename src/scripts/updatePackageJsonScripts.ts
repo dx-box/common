@@ -1,6 +1,6 @@
+import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
 
 export const updatePackageJsonScripts = () => {
   const pkgPath = path.join(process.cwd(), 'package.json');
@@ -31,7 +31,7 @@ export const updatePackageJsonScripts = () => {
   }
 
   // 🔧 필요한 devDependencies 설치
-  const requiredDeps = ['prettier', 'eslint', 'tsx', 'husky'];
+  const requiredDeps = ['prettier', 'eslint', 'eslint-config-prettier', 'tsx', 'husky'];
   const missingDeps = requiredDeps.filter((dep) => {
     return !((pkg.devDependencies && pkg.devDependencies[dep]) || (pkg.dependencies && pkg.dependencies[dep]));
   });

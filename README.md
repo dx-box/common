@@ -10,14 +10,10 @@
 
 ## 주요 기능 및 TODO
 
-1. Git 훅을 통한 Prettier, ESLint 자동 수정
+1. Git pre-commit 훅을 통한 Prettier, ESLint 자동 수정
 2. TypeScript, ESLint, Prettier용 절대 경로(alias) 설정
 3. import 문 자동 정렬
-4. 컴포넌트 props 정렬
-5. 컴포넌트 인자(props) 정렬
-6. 컴포넌트 멤버 정렬 (state, hooks, handlers 등)
-7. 사용자 설정과 병합 가능한 설정 로딩 지원
-8. 프레임워크별 옵션 분리 (React, Vue 등) — 추후 계획
+4. 사용자 설정과 병합 가능한 설정 로딩 지원 (dx.config.ts)
 
 ---
 
@@ -26,6 +22,13 @@
 - `npm install @dx-box/common --save-dev`로 설치
 - `dx-common init` 명령어로 기본 설정과 Git 훅 자동 적용
 - `.eslintrc.json`, `.prettierrc`, `tsconfig.json` 파일 자동 생성 및 병합 지원
+
+---
+
+## TODO
+
+- eslint v8, v9 선택 가능하도록 변경
+- 절대경로 설정
 
 ---
 
