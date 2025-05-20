@@ -8,12 +8,37 @@
 
 ---
 
-## 주요 기능 및 TODO
+## 주요 기능
 
-1. Git pre-commit 훅을 통한 Prettier, ESLint 자동 수정
-2. TypeScript, ESLint, Prettier용 절대 경로(alias) 설정
+1. TypeScript, ESLint, Prettier 기본설정 템플릿 제공
+2. Git pre-commit 훅을 통한 Prettier, ESLint 자동 수정
 3. import 문 자동 정렬
 4. 사용자 설정과 병합 가능한 설정 로딩 지원 (dx.config.ts)
+
+### 기본 설정 템플릿 제공
+
+templates 폴더에 기본 dx.config.ts, eslint.base.v8.js, eslint.base.v9.js, prettier.base.js, tsconfig.base.json 등의 설정
+파일을 제공합니다.
+
+### 자동 설정 파일 생성 및 병합
+
+사용자가 기존에 작성한 설정과 템플릿 설정을 병합하여 `tsconfig.json`, `.prettierrc.json`, ESLint 설정
+파일(`.eslintrc.cjs` 또는 `eslint.config.js`)로 저장합니다.
+
+### ESLint 버전 대응
+
+ESLint 버전 8과 9 이상을 자동 감지하여, 적합한 설정 형식을 적용합니다.
+
+- v8 - `.eslintrc.cjs`
+- v9 이상 - Flat Config `eslint.config.js`
+
+### 코드 포맷 및 린트 실행 지원
+
+`dx-lint`와 `dx-format` 스크립트를 실행하여 코드 스타일 검사와 자동 수정을 수행합니다.
+
+### Git pre-commit 훅 자동 설정 (Husky)
+
+Git 저장소에 Husky pre-commit 훅을 등록해 커밋 전에 자동으로 린트 및 포맷 검사를 실행하도록 구성합니다.
 
 ---
 
@@ -21,14 +46,16 @@
 
 - `npm install @dx-box/common --save-dev`로 설치
 - `dx-common init` 명령어로 기본 설정과 Git 훅 자동 적용
-- `.eslintrc.json`, `.prettierrc`, `tsconfig.json` 파일 자동 생성 및 병합 지원
+- `eslint.config.js`, `.prettierrc.json`, `tsconfig.json` 파일 자동 생성 및 병합 지원
 
 ---
 
 ## TODO
 
-- eslint v8, v9 선택 가능하도록 변경
+- eslint v9 override 가능하도록 변경
 - 절대경로 설정
+- 빌드 minify 로직 추가
+- `dx.config.ts` 제거 및 override 로직 개선
 
 ---
 
