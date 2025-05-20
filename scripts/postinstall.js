@@ -1,60 +1,44 @@
-import fs, { chmodSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { execSync } from 'child_process';
 
-import { mergeAndWrite, updatePackageJson, loadDxConfig } from '../src';
+import { copyDefaultConfig, loadDxConfig, mergeConfig } from '../src/configs';
+import { runFormatScripts, setupHuskyHookScripts, updatePackageJsonScripts } from '../src/scripts';
 
 const ROOT = process.cwd();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const TEMPLATE_DIR = path.join(__dirname, '../templates');
 
-// dx.config.ts가 없으면 템플릿 복사
-const configFile = path.join(ROOT, 'dx.config.ts');
-if (!fs.existsSync(configFile)) {
-  const source = path.join(TEMPLATE_DIR, 'dx.config.ts');
-  const content = fs.readFileSync(source, 'utf-8');
-  fs.writeFileSync(configFile, content);
-  console.log('✅ dx.config.ts 생성됨');
-}
-
 const main = async () => {
-  updatePackageJson();
+  // 1. dx.config.ts가 없으면 템플릿에서 복사
+  copyDefaultConfig(ROOT, TEMPLATE_DIR);
+
+  // 2. package.json에 필요한 dx 관련 스크립트 추가 (예: dx-lint, dx-format 등)
+  updatePackageJsonScripts();
+
+  // 3. 사용자 정의 dx.config.ts를 불러와 설정을 로드
   const userConfig = await loadDxConfig();
 
-  mergeAndWrite(path.join(TEMPLATE_DIR, 'tsconfig.base.json'), path.join(ROOT, 'tsconfig.json'), userConfig.tsconfig);
+  // 4. tsconfig 설정 병합 및 저장
+  mergeConfig(path.join(TEMPLATE_DIR, 'tsconfig.base.json'), path.join(ROOT, 'tsconfig.json'), userConfig.tsconfig);
 
-  mergeAndWrite(path.join(TEMPLATE_DIR, 'prettier.base.js'), path.join(ROOT, '.prettierrc.json'), userConfig.prettier);
+  // 5. prettier 설정 병합 및 저장
+  mergeConfig(path.join(TEMPLATE_DIR, 'prettier.base.js'), path.join(ROOT, '.prettierrc.json'), userConfig.prettier);
 
-  mergeAndWrite(path.join(TEMPLATE_DIR, 'eslint.base.js'), path.join(ROOT, '.eslintrc.cjs'), userConfig.eslint, false);
+  // 6. eslint 설정 병합 및 저장
+  mergeConfig(
+    // default: v9
+    path.join(TEMPLATE_DIR, 'eslint.base.v9.js'),
+    path.join(ROOT, 'eslint.config.cjs'),
+    userConfig.eslint,
+    false // 이 값은 보통 "deep merge가 아닌 덮어쓰기 여부"를 제어
+  );
 
-  // ✅ Husky 설치 및 pre-commit 훅 등록
-  const isGitRepo = fs.existsSync(path.join(ROOT, '.git'));
-  if (!isGitRepo) {
-    console.log('⚠️ Git 저장소가 아니므로 husky 설정을 건너뜁니다.');
-    return;
-  }
+  // 7. 선택적으로 추가 실행할 스크립트가 있다면 실행 (예: lint-staged 등)
+  runFormatScripts();
 
-  try {
-    execSync('git config core.hooksPath .husky', { stdio: 'inherit' });
-
-    const hookPath = path.join(ROOT, '.husky', 'pre-commit');
-    const hookContent = `
-#!/bin/sh
-
-npm run dx-lint
-npm run dx-format
-git update-index --again
-`;
-
-    fs.mkdirSync(path.dirname(hookPath), { recursive: true });
-    fs.writeFileSync(hookPath, hookContent.trimStart(), { mode: 0o755 });
-    chmodSync(hookPath, 0o755);
-    console.log('✅ Husky pre-commit hook 생성됨');
-  } catch (e) {
-    console.error('❌ Husky 설정 실패:', e.message);
-  }
+  // 8. husky가 설치된 Git 저장소에 pre-commit 훅 등록
+  setupHuskyHookScripts();
 };
 
 main();

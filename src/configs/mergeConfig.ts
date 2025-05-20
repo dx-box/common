@@ -3,7 +3,7 @@ import path from 'path';
 import { pathToFileURL } from 'url';
 import deepmerge from 'deepmerge';
 
-export const mergeAndWrite = async (
+export const mergeConfig = async (
   basePath: string,
   targetPath: string,
   userConfig: Record<string, any> = {},

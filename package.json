@@ -15,8 +15,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "postinstall": "tsx scripts/postinstall.js",
-    "dx-lint": "eslint . --ext .ts,.tsx,.js --fix",
-    "dx-format": "prettier --write \"**/*.{ts,tsx,js,json,md}\""
+    "dx-lint": "eslint . --ext .ts,.tsx,.js,.cjs --fix",
+    "dx-format": "prettier --write \"**/*.{ts,tsx,js,cjs,json,md}\""
   },
   "repository": {
     "type": "git",
