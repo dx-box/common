@@ -1,22 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import { mergeConfig } from '../configs/mergeConfig';
-import { isEslintV9Above, hasKeywordInFilename } from '../utils';
+import { mergeConfig } from '../configs/index.js';
+import { isEslintV9Above, hasKeywordInFilename } from '../utils/index.js';
 
 const isESLintV9 = isEslintV9Above();
 
 export const setupConfigScripts = async (rootDir: string, templateDir: string) => {
   // tsconfig.json 병합
-  if (fs.existsSync(path.join(rootDir, 'tsconfig.json'))) {
-    await mergeConfig(path.join(templateDir, 'tsconfig.base.json'), path.join(rootDir, 'tsconfig.json'));
-  }
+  const tsconfigPath = path.join(rootDir, 'tsconfig.json');
+  await mergeConfig(path.join(templateDir, 'tsconfig.base.json'), tsconfigPath);
 
   // prettier 설정 병합 (prettier 관련 키워드 포함 파일 탐색)
   const prettierFile = hasKeywordInFilename(rootDir, ['prettier']);
-  if (prettierFile) {
-    const fullPath = path.join(rootDir, prettierFile);
-    await mergeConfig(path.join(templateDir, 'prettier.base.js'), fullPath);
-  }
+  const prettierTargetPath = prettierFile ? path.join(rootDir, prettierFile) : path.join(rootDir, '.prettierrc.json');
+
+  await mergeConfig(path.join(templateDir, 'prettier.base.js'), prettierTargetPath);
 
   // eslint 설정 병합 또는 복사
   if (isESLintV9) {
@@ -25,9 +23,9 @@ export const setupConfigScripts = async (rootDir: string, templateDir: string) =
     console.log(`✅ ESLint V9 flat config 복사 완료`);
   } else {
     const eslintFile = hasKeywordInFilename(rootDir, ['.eslintrc']);
-    if (eslintFile) {
-      const fullPath = path.join(rootDir, eslintFile);
-      await mergeConfig(path.join(templateDir, 'eslint.base.v8.js'), fullPath);
-    }
+
+    const eslintTargetPath = eslintFile ? path.join(rootDir, eslintFile) : path.join(rootDir, '.eslintrc.cjs');
+
+    await mergeConfig(path.join(templateDir, 'eslint.base.v8.js'), eslintTargetPath);
   }
 };

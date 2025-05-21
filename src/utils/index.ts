@@ -1,2 +1,3 @@
-export * from './isEsLintV9Above';
-export * from './hasKeywordInFilename';
+export * from './isEsLintV9Above.js';
+export * from './hasKeywordInFilename.js';
+export * from './deepMerge.js';
