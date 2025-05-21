@@ -22,7 +22,7 @@ export default [
       '@typescript-eslint': eslintPluginTs,
     },
     rules: {
-      'no-console': 'warn',
+      'no-console': 'off',
       'no-debugger': 'error',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
@@ -32,6 +32,7 @@ export default [
       eqeqeq: ['error', 'always'],
       curly: ['error', 'all'],
       'no-duplicate-imports': 'error',
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
       'prefer-const': 'error',
       'object-shorthand': ['error', 'always'],
     },

@@ -4,12 +4,10 @@
   "description": "(DX) by providing common configurations for TypeScript, ESLint, Prettier, and automated Git hooks for formatting and linting.",
   "type": "module",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "templates",
-    "scripts",
-    "dx.config.ts"
+    "scripts"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
