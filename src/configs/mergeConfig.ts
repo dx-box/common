@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
-import deepmerge from 'deepmerge';
+import { deepMerge } from '../utils/index.js';
 
 const loadConfig = async (filePath: string): Promise<Record<string, unknown>> => {
   if (!fs.existsSync(filePath)) return {};
@@ -15,7 +15,7 @@ const loadConfig = async (filePath: string): Promise<Record<string, unknown>> =>
       return content.prettier || content.eslintConfig || {};
     }
 
-    if (ext === '.js' || ext === '.cjs') {
+    if (ext === '.js' || ext === '.cjs' || ext === '.mjs') {
       const mod = await import(pathToFileURL(filePath).toString());
       return mod.default || mod;
     }
@@ -38,7 +38,7 @@ const _overwriteMerge = (destinationArray: unknown[], sourceArray: unknown[]) =>
 export const mergeConfig = async (basePath: string, targetPath: string, isJSON: boolean = true) => {
   const base = await loadConfig(basePath);
   const target = await loadConfig(targetPath);
-  const merged = deepmerge(base, target, {
+  const merged = deepMerge(base, target, {
     arrayMerge: _overwriteMerge,
   });
 

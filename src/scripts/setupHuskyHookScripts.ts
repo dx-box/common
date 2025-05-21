@@ -2,11 +2,9 @@ import { execSync } from 'child_process';
 import fs, { chmodSync } from 'fs';
 import path from 'path';
 
-const ROOT = process.cwd();
-
-export const setupHuskyHookScripts = () => {
+export const setupHuskyHookScripts = (rootDir: string) => {
   // ✅ Husky 설치 및 pre-commit 훅 등록
-  const isGitRepo = fs.existsSync(path.join(ROOT, '.git'));
+  const isGitRepo = fs.existsSync(path.join(rootDir, '.git'));
   if (!isGitRepo) {
     console.log('⚠️ Git 저장소가 아니므로 husky 설정을 건너뜁니다.');
     return;
@@ -15,7 +13,7 @@ export const setupHuskyHookScripts = () => {
   try {
     execSync('git config core.hooksPath .husky', { stdio: 'inherit' });
 
-    const hookPath = path.join(ROOT, '.husky', 'pre-commit');
+    const hookPath = path.join(rootDir, '.husky', 'pre-commit');
     const hookContent = _dedent(`
       #!/bin/sh
 
