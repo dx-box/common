@@ -1,6 +1,6 @@
 # @dx-box/common
 
-> 개발 경험(DX)을 향상시키는 TypeScript, ESLint, Prettier 기본 설정 및 Git 훅 자동화 패키지입니다.
+- 개발 생산성을 높이고 일관된 코드 품질을 유지하기 위한 구성 자동화 패키지
 
 ---
 
@@ -52,11 +52,14 @@ Git 저장소에 Husky pre-commit 훅을 등록해 커밋 전에 자동으로 �
 
 ## TODO
 
-- eslint v9 override 가능하도록 변경
-- 절대경로 설정
-- 빌드 minify 로직 추가
-- `dx.config.ts` 제거 및 override 로직 개선
-- `yml`, `yaml` 지원하지 않음
+- [ ] eslint v9 override 가능하도록 변경
+- [ ] 절대경로 설정
+- [ ] 빌드 minify 로직 추가
+- [ ] `dx.config.ts` 제거 및 override 로직 개선
+- [ ] `yml`, `yaml` 지원하지 않음
+- [ ] README 재작성
+  - [ ] 한글문서
+  - [ ] 영어문서
 
 ---
 
