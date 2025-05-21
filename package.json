@@ -1,6 +1,6 @@
 {
   "name": "@dx-box/common",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "(DX) by providing common configurations for TypeScript, ESLint, Prettier, and automated Git hooks for formatting and linting.",
   "type": "module",
   "main": "dist/index.js",
@@ -20,7 +20,12 @@
     "type": "git",
     "url": "git+https://github.com/dx-box/common.git"
   },
-  "keywords": [],
+  "keywords": [
+    "dx",
+    "dx-box",
+    "dx-kit",
+    "dx-tools"
+  ],
   "author": "dx-box",
   "license": "MIT",
   "bugs": {
@@ -38,5 +43,8 @@
     "prettier": "^3.5.3",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
