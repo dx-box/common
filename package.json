@@ -14,8 +14,8 @@
     "build": "npm run clean && node scripts/build.mjs",
     "build:pack": "npm run build && npm pack",
     "postinstall": "node dist/scripts/postinstall.js",
-    "dx-lint": "eslint . --ext .ts,.tsx,.js,.cjs --fix",
-    "dx-format": "prettier --write \"**/*.{ts,tsx,js,cjs,json,md}\""
+    "dx:lint": "eslint . --ext .ts,.tsx,.js,.cjs --fix",
+    "dx:format": "prettier --write \"**/*.{ts,tsx,js,cjs,json,md}\""
   },
   "repository": {
     "type": "git",

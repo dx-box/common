@@ -17,8 +17,8 @@ export const setupHuskyHookScripts = (rootDir: string) => {
     const hookContent = _dedent(`
       #!/bin/sh
 
-      npm run dx-lint
-      npm run dx-format
+      npm run dx:lint
+      npm run dx:format
       git update-index --again
     `);
 

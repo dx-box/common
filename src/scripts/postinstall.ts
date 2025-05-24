@@ -1,6 +1,6 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { runFormatScripts, setupHuskyHookScripts, updatePackageJsonScripts, setupConfigScripts } from './index.js';
+import { runFormatScripts, setupConfigScripts, setupHuskyHookScripts, updatePackageJsonScripts } from './index.js';
 
 const ROOT = process.env.INIT_CWD || process.cwd();
 const __filename = fileURLToPath(import.meta.url);
@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const TEMPLATE_DIR = path.join(__dirname, '../../templates');
 
 const main = async () => {
-  // 1. package.json에 필요한 dx 관련 스크립트 추가 (예: dx-lint, dx-format 등)
+  // 1. package.json에 필요한 dx 관련 스크립트 추가 (예: dx:lint, dx:format 등)
   await updatePackageJsonScripts(ROOT);
 
   // 2. 설정 병합 및 저장
