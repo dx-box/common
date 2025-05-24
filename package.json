@@ -11,7 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf dist",
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && node scripts/build.mjs",
     "build:pack": "npm run build && npm pack",
     "postinstall": "node dist/scripts/postinstall.js",
     "dx-lint": "eslint . --ext .ts,.tsx,.js,.cjs --fix",
@@ -37,6 +37,7 @@
     "@types/node": "^22.15.19",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
+    "esbuild": "^0.25.4",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
     "husky": "^9.1.7",
