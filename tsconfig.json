@@ -13,7 +13,6 @@
     "baseUrl": "src",
     "paths": {
       "@cli/*": ["cli/*"],
-      "@configs/*": ["configs/*"],
       "@scripts/*": ["scripts/*"],
       "@utils/*": ["utils/*"]
     }
