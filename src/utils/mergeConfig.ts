@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
-import { deepMerge } from '../utils/index.js';
+import { deepMerge } from './index.js';
 
 const loadConfig = async (filePath: string): Promise<Record<string, unknown>> => {
   if (!fs.existsSync(filePath)) return {};
