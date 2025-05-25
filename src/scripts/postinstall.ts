@@ -1,18 +1,24 @@
+import { Command } from 'commander';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { runFormatScripts, setupConfigScripts, setupHuskyHookScripts, updatePackageJsonScripts } from './index.js';
-
 const ROOT = process.env.INIT_CWD || process.cwd();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const TEMPLATE_DIR = path.join(__dirname, '../../templates');
+
+const program = new Command();
+program.option('-t, --target <type>', 'target type: fe or be', 'fe');
+
+program.parse(process.argv);
+const options = program.opts();
 
 const main = async () => {
   // 1. package.json에 필요한 dx 관련 스크립트 추가 (예: dx:lint, dx:format 등)
   await updatePackageJsonScripts(ROOT);
 
   // 2. 설정 병합 및 저장
-  await setupConfigScripts(ROOT, TEMPLATE_DIR);
+  await setupConfigScripts(ROOT, TEMPLATE_DIR, options.target);
 
   // 3. 선택적으로 추가 실행할 스크립트가 있다면 실행 (예: lint-staged 등)
   await runFormatScripts();

@@ -2,13 +2,15 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
     "strict": true,
     "outDir": "dist",
     "rootDir": "src",
-    "sourceMap": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "src"
   },
-  "include": ["src"]
+  "include": ["src", "scripts/build.mjs"]
 }

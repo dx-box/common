@@ -9,14 +9,7 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": "src",
-    "paths": {
-      "@cli/*": ["cli/*"],
-      "@configs/*": ["configs/*"],
-      "@scripts/*": ["scripts/*"],
-      "@utils/*": ["utils/*"]
-    }
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src", "scripts/build.mjs"]
+  "include": ["src"]
 }

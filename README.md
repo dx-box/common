@@ -56,6 +56,8 @@ Git 저장소에 Husky pre-commit 훅을 등록해 커밋 전에 자동으로 �
   - [ ] eslint v9 override 가능하도록 변경
   - [ ] 절대경로 설정
   - [x] 빌드 minify 로직 추가
+  - [ ] `dx:absolute`로 모든 경로 절대경로로 변경
+  - [x] tsconfig be,fe 분리
   - [ ] changeset
   - [ ] github actions / gitlab ci/cd / jenkins
   - [ ] 대화형 프롬프트로 설정
