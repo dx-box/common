@@ -2,7 +2,7 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
-export const runInstallDevDependencies = (rootDir: string) => {
+export const installDevDependencies = (rootDir: string) => {
   const requiredDeps = ['prettier', 'eslint', 'eslint-config-prettier', 'husky', '@typescript-eslint/eslint-plugin'];
   const missingDeps = requiredDeps.filter((dep) => !_isPackageInstalled(rootDir, dep));
 

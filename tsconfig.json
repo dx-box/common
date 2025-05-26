@@ -12,10 +12,19 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "src",
     "paths": {
-      "@cli/*": ["cli/*"],
-      "@scripts/*": ["scripts/*"],
-      "@utils/*": ["utils/*"]
+      "@cli/*": [
+        "cli/*"
+      ],
+      "@scripts/*": [
+        "scripts/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ]
     }
   },
-  "include": ["src", "scripts/build.mjs"]
+  "include": [
+    "src",
+    "scripts/build.mjs"
+  ]
 }

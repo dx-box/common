@@ -24,9 +24,9 @@ const loadConfig = async (filePath: string): Promise<Record<string, unknown>> =>
       return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
     }
 
-    throw new Error(`지원하지 않는 포맷: ${filePath}`);
+    throw new Error(`Unsupported format: ${filePath}`);
   } catch (err) {
-    console.warn(`⚠️  설정 로드 실패 → ${filePath}: ${(err as { message: string }).message}`);
+    console.warn(`⚠️  Failed to load config → ${filePath}: ${(err as { message: string }).message}`);
     return {};
   }
 };
@@ -49,5 +49,5 @@ export const mergeConfig = async (basePath: string, targetPath: string, isJSON: 
       : `module.exports = ${JSON.stringify(merged, null, 2)};\n`;
 
   fs.writeFileSync(targetPath, formatted, 'utf-8');
-  console.log(`✅ 설정 병합 완료 → ${path.basename(targetPath)}`);
+  console.log(`✅ Configuration merged → ${path.basename(targetPath)}`);
 };

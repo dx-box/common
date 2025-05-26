@@ -9,16 +9,19 @@
     "templates"
   ],
   "bin": {
+    "dx-postinstall": "dist/bin/dx-postinstall.js",
     "dx-init": "dist/bin/dx-init.js",
     "dx-fix": "dist/bin/dx-fix.js",
-    "dx-absolute": "dist/bin/dx-absolute.js"
+    "dx-absolute": "dist/bin/dx-absolute.js",
+    "dx-lint": "dist/bin/dx-lint.js",
+    "dx-format": "dist/bin/dx-format.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf dist",
     "build": "npm run clean && node scripts/build.mjs",
     "build:pack": "npm run build && npm pack",
-    "postinstall": "node dist/scripts/postinstall.js"
+    "postinstall": "node dist/bin/dx-postinstall.js"
   },
   "repository": {
     "type": "git",

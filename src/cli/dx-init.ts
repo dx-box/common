@@ -1,4 +1,5 @@
-import { runFixScripts, runInstallDevDependencies, runUpdateTsconfigPath } from '@scripts/index.js';
+import { installDevDependencies, updateTsconfigPath } from '@scripts/index.js';
+import { execSync } from 'child_process';
 import { Command } from 'commander';
 
 const program = new Command();
@@ -10,9 +11,9 @@ const main = () => {
   const options = program.opts();
   const srcFolder = options.src;
 
-  runInstallDevDependencies(rootDir);
-  runUpdateTsconfigPath(rootDir, srcFolder);
-  runFixScripts();
+  installDevDependencies(rootDir);
+  updateTsconfigPath(rootDir, srcFolder);
+  execSync('npx dx-fix');
 };
 
 main();

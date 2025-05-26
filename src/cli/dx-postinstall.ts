@@ -14,21 +14,17 @@ program.option('-t, --target <type>', 'target type: fe or be', 'fe');
 program.parse(process.argv);
 const options = program.opts();
 
-// const main = async () => {
-//   // 1. 설정 병합 및 저장
-//   await setupConfigScripts(ROOT, TEMPLATE_DIR, options.target);
-
-//   // 2. husky가 설치된 Git 저장소에 pre-commit 훅 등록
-//   await setupHuskyHookScripts(ROOT);
-// };
-
 const main = async () => {
   try {
+    console.log('🔧 Setting up configuration files...');
     await setupConfigScripts(ROOT, TEMPLATE_DIR, options.target);
+
+    console.log('🔧 Setting up Husky hooks...');
     await setupHuskyHookScripts(ROOT);
-    console.log('Setup complete.');
+
+    console.log('✅ Setup complete. All ready to go!');
   } catch (error) {
-    console.error('Error during setup:', error);
+    console.error('❌ Error during setup:', error);
     process.exit(1);
   }
 };

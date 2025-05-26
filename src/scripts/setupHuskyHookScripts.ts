@@ -5,7 +5,7 @@ import path from 'path';
 export const setupHuskyHookScripts = (rootDir: string) => {
   const isGitRepo = fs.existsSync(path.join(rootDir, '.git'));
   if (!isGitRepo) {
-    console.log('⚠️ Git 저장소가 아니므로 husky 설정을 건너뜁니다.');
+    console.log('⚠️ Skipping Husky setup because this is not a Git repository.');
     return;
   }
 
@@ -26,14 +26,13 @@ export const setupHuskyHookScripts = (rootDir: string) => {
         .map((line) => line.trim());
       const existingSet = new Set(existing);
 
-      // 누락된 라인만 유지하면서 순서 고정
       finalLines = requiredLines.filter((line) => line === '' || existingSet.has(line) || requiredLines.includes(line));
     }
 
     fs.writeFileSync(hookPath, finalLines.join('\n') + '\n', { mode: 0o755 });
     chmodSync(hookPath, 0o755);
 
-    console.log('✅ Husky pre-commit hook 구성 완료');
+    console.log('✅ Husky pre-commit hook configured successfully');
   } catch (e: unknown) {
     console.error('❌ Husky 설정 실패:', (e as Error).message);
   }

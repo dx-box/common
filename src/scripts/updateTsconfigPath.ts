@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export const runUpdateTsconfigPath = (rootDir: string, srcFolder: string) => {
+export const updateTsconfigPath = (rootDir: string, srcFolder: string) => {
   const tsconfigPath = path.resolve(rootDir, 'tsconfig.json');
   const srcPath = path.resolve(rootDir, srcFolder);
 
