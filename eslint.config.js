@@ -1,7 +1,6 @@
 import eslintPluginTs from '@typescript-eslint/eslint-plugin';
 import parserTs from '@typescript-eslint/parser';
 import prettier from 'eslint-config-prettier';
-import globals from 'globals';
 
 export default [
   {
@@ -11,11 +10,6 @@ export default [
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
-      },
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-        ...globals.es2021,
       },
     },
     plugins: {

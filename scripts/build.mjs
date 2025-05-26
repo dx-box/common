@@ -45,7 +45,7 @@ async function buildFolder(srcPattern, outDir, outBase) {
   await build({
     entryPoints,
     outdir: outDir,
-    bundle: true,
+    bundle: false,
     minify: true,
     platform: 'node',
     format: 'esm',
@@ -62,7 +62,7 @@ async function buildAll() {
     await build({
       entryPoints: cliEntryPoints,
       outdir: 'dist/bin',
-      bundle: true,
+      bundle: false,
       minify: true,
       platform: 'node',
       format: 'esm',
@@ -83,7 +83,7 @@ async function buildAll() {
   await build({
     entryPoints: ['src/index.ts'],
     outdir: 'dist',
-    bundle: true,
+    bundle: false,
     minify: true,
     platform: 'node',
     format: 'esm',
