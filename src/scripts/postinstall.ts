@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { setupConfigScripts, setupHuskyHookScripts } from './index.js';
+import { setupConfigScripts, setupHuskyHookScripts } from '@scripts/index.js';
 
 const ROOT = process.env.INIT_CWD || process.cwd();
 const __filename = fileURLToPath(import.meta.url);
