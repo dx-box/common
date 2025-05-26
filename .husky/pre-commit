@@ -1,4 +1,5 @@
 #!/bin/sh
 
+npx dx-absolute
 npx dx-fix
 git update-index --again
