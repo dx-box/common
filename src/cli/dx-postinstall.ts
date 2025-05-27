@@ -1,7 +1,7 @@
+import { setupChangesetScripts, setupConfigScripts, setupHuskyHookScripts } from '@scripts/index.js';
 import { Command } from 'commander';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { setupConfigScripts, setupHuskyHookScripts } from '@scripts/index.js';
 
 const ROOT = process.env.INIT_CWD || process.cwd();
 const __filename = fileURLToPath(import.meta.url);
@@ -22,6 +22,8 @@ const main = async () => {
     console.log('🔧 Setting up Husky hooks...');
     await setupHuskyHookScripts(ROOT);
 
+    console.log('🔧 Setting up Changeset...');
+    await setupChangesetScripts(ROOT, TEMPLATE_DIR);
     console.log('✅ Setup complete. All ready to go!');
   } catch (error) {
     console.error('❌ Error during setup:', error);

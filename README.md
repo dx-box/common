@@ -56,7 +56,7 @@ Git 저장소에 Husky pre-commit 훅을 등록해 커밋 전에 자동으로 �
   - [x] 빌드 minify 로직 추가
   - [x] `npx dx-absolute`로 src 내 모든 경로 절대경로로 변경
   - [x] tsconfig be,fe 분리
-  - [ ] changeset
+  - [x] changeset
   - [ ] github actions / gitlab ci/cd / jenkins
   - [x] 대화형 프롬프트로 설정
   - [x] dx-init 커맨드 추가
