@@ -14,7 +14,7 @@ export const setupChangesetScripts = async (root: string, templateDir: string) =
 
   const platform = detectGitPlatform(remoteUrl);
 
-  const configTemplateFile = `changeset-config.github.${platform}.json`;
+  const configTemplateFile = `changeset-config.${platform}.json`;
 
   const configTemplatePath = path.join(templateDir, configTemplateFile);
 
