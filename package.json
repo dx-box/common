@@ -1,6 +1,6 @@
 {
   "name": "@dx-box/common",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "(DX) by providing common configurations for TypeScript, ESLint, Prettier, and automated Git hooks for formatting and linting.",
   "type": "module",
   "main": "dist/index.js",
