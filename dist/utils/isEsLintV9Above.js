@@ -1,0 +1,1 @@
+import{execSync as t}from"child_process";const o=()=>{try{const r=t("npx eslint --version").toString().trim();return parseInt(r.split(".")[0].replace(/^v/,""),10)>=9}catch{return!0}};export{o as isEslintV9Above};

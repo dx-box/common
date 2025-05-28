@@ -1,0 +1,4 @@
+import{execSync as p}from"child_process";import e,{chmodSync as a}from"fs";import t from"path";const f=n=>{if(!e.existsSync(t.join(n,".git"))){console.log("\u26A0\uFE0F Skipping Husky setup because this is not a Git repository.");return}try{p("git config core.hooksPath .husky",{stdio:"inherit"});const i=t.join(n,".husky","pre-commit"),s=["#!/bin/sh","","npx dx-absolute","npx dx-fix","git update-index --again"];e.mkdirSync(t.dirname(i),{recursive:!0});let r=[...s];if(e.existsSync(i)){const c=e.readFileSync(i,"utf-8").split(`
+`).map(o=>o.trim()),u=new Set(c);r=s.filter(o=>o===""||u.has(o)||s.includes(o))}e.writeFileSync(i,r.join(`
+`)+`
+`,{mode:493}),a(i,493),console.log("\u2705 Husky pre-commit hook configured successfully")}catch(i){console.error("\u274C Husky \uC124\uC815 \uC2E4\uD328:",i.message)}};export{f as setupHuskyHookScripts};

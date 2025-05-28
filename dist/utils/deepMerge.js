@@ -1,0 +1,1 @@
+const i=(n,o,c={})=>{if(!t(n))return o;if(!t(o))return n;const a=Array.isArray(n)?[]:{...n},y=new Set([...Object.keys(n),...Object.keys(o)]);for(const e of y){const s=n[e],r=o[e];Array.isArray(s)&&Array.isArray(r)?a[e]=c.arrayMerge?c.arrayMerge(s,r):[...s,...r]:t(s)&&t(r)?a[e]=i(s,r,c):a[e]=r}return a},t=n=>typeof n=="object"&&n!==null&&!Array.isArray(n);export{i as deepMerge};
