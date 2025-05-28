@@ -3,7 +3,15 @@ import fs from 'fs';
 import path from 'path';
 
 export const installDevDependencies = (rootDir: string) => {
-  const requiredDeps = ['prettier', 'eslint', 'eslint-config-prettier', 'husky', '@typescript-eslint/eslint-plugin'];
+  const requiredDeps = [
+    'prettier',
+    'eslint',
+    'eslint-config-prettier',
+    'husky',
+    '@typescript-eslint/eslint-plugin',
+    '@changesets/cli',
+    '@changesets/changelog-github',
+  ];
   const missingDeps = requiredDeps.filter((dep) => !_isPackageInstalled(rootDir, dep));
 
   if (missingDeps.length > 0) {
