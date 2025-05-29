@@ -21,7 +21,11 @@ export const deepMerge = <T extends object>(
     } else if (isMergeableObject(tVal) && isMergeableObject(sVal)) {
       (output as Record<string, unknown>)[key] = deepMerge(tVal as object, sVal as object, options);
     } else {
-      (output as Record<string, unknown>)[key] = sVal;
+      if (sVal === undefined) {
+        (output as Record<string, unknown>)[key] = tVal;
+      } else {
+        (output as Record<string, unknown>)[key] = sVal;
+      }
     }
   }
 
