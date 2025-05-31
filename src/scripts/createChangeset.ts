@@ -1,40 +1,78 @@
-import { existsSync } from 'fs';
-import { mkdir, writeFile } from 'fs/promises';
-import { join, resolve } from 'path';
+import chalk from 'chalk';
+import { execSync } from 'child_process';
+import { randomUUID } from 'crypto';
+import fs from 'fs';
+import path from 'path';
 
-const validBumps = ['patch', 'minor', 'major'] as const;
-type BumpType = (typeof validBumps)[number];
+const getPackageName = (): string => {
+  const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+  return pkg.name || 'your-package';
+};
 
-export const createChangeset = async (bumpType: BumpType) => {
-  if (!validBumps.includes(bumpType)) {
-    throw new Error('Version type must be one of: patch, minor, or major.');
+const getPackageVersion = (): string => {
+  const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+  return pkg.version || '0.0.0';
+};
+
+const getCommitsSinceVersionInMessage = (version: string): string[] => {
+  try {
+    const log = execSync('git log --pretty=format:"%H %s"', { encoding: 'utf-8' });
+    const commits = log.split('\n').map((line) => {
+      const firstSpace = line.indexOf(' ');
+      return {
+        hash: line.slice(0, firstSpace),
+        message: line.slice(firstSpace + 1),
+      };
+    });
+
+    const versionCommitIndex = commits.findIndex((c) => c.message.includes(version));
+    if (versionCommitIndex === -1) {
+      return commits.map((c) => `- ${c.message}`);
+    }
+
+    const newerCommits = commits.slice(0, versionCommitIndex);
+    if (newerCommits.length === 0) return ['- (no new commits since version)'];
+    return newerCommits.map((c) => `- ${c.message}`);
+  } catch {
+    return ['- (no commits found)'];
+  }
+};
+
+export const createChangeset = async (bump: string) => {
+  const validBumps = ['patch', 'minor', 'major'];
+  if (!validBumps.includes(bump)) {
+    throw new Error('Version type must be one of patch, minor, or major.');
   }
 
-  const changesetDir = resolve(process.cwd(), '.changeset');
-  const fileName = `${bumpType}-${Date.now()}.md`;
-  const targetPath = join(changesetDir, fileName);
+  const packageName = getPackageName();
+  const packageVersion = getPackageVersion();
+  const commits = getCommitsSinceVersionInMessage(packageVersion);
 
-  const template = `---
-"@dx-box/common": ${bumpType}
+  const content = `---
+"${packageName}": ${bump}
 ---
 
-### ✨ Summary of Changes
+### ✨ Summary
 
 - 
 
-### 📌 Detailed Description (Optional)
+### 📌 Detailed Description (optional)
 
-- 
+${commits.join('\n')}
 
-### 🔧 Migration Required?
+### 🔧 Migration Needed?
 
 - 
 `;
 
-  if (!existsSync(changesetDir)) {
-    await mkdir(changesetDir);
+  const fileName = `${randomUUID().split('-')[0]}-${bump}.md`;
+  const filePath = path.join('.changeset', fileName);
+
+  if (!fs.existsSync('.changeset')) {
+    fs.mkdirSync('.changeset');
   }
 
-  await writeFile(targetPath, template, 'utf8');
-  console.log(`✅ Created changeset: .changeset/${fileName}`);
+  fs.writeFileSync(filePath, content.trim());
+  console.log(`✅ Changeset template created: .changeset/${fileName}`);
+  console.log(`📦 Package: ${chalk.green(packageName)}  |  bump: ${bump}`);
 };
