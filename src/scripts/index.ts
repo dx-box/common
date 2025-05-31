@@ -5,3 +5,4 @@ export * from './setupChangesetScripts.js';
 export * from './setupConfigScripts.js';
 export * from './setupHuskyHookScripts.js';
 export * from './updateTsconfigPath.js';
+export * from './createChangeset.js';

@@ -11,6 +11,7 @@ export const installDevDependencies = (rootDir: string) => {
     '@typescript-eslint/eslint-plugin',
     '@changesets/cli',
     '@changesets/changelog-github',
+    'inquirer',
   ];
   const missingDeps = requiredDeps.filter((dep) => !_isPackageInstalled(rootDir, dep));
 
