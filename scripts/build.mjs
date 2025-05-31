@@ -1,6 +1,6 @@
 import { build } from 'esbuild';
 import fg from 'fast-glob';
-import fs from 'fs';
+import fs, { chmodSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -56,7 +56,6 @@ async function buildFolder(srcPattern, outDir, outBase) {
 }
 
 async function buildAll() {
-  // bin (cli) 파일들 dist/bin 으로
   const cliEntryPoints = await fg(['src/cli/**/*.ts']);
   if (cliEntryPoints.length > 0) {
     await build({
@@ -73,13 +72,16 @@ async function buildAll() {
         js: '#!/usr/bin/env node',
       },
     });
+
+    const binFiles = await fg(['dist/bin/**/*.js']);
+    for (const file of binFiles) {
+      chmodSync(file, 0o755);
+    }
   }
 
-  // scripts, utils는 dist/scripts, dist/utils
   await buildFolder('src/scripts/**/*.ts', 'dist/scripts', 'src/scripts');
   await buildFolder('src/utils/**/*.ts', 'dist/utils', 'src/utils');
 
-  // src/index.ts는 dist 루트에
   await build({
     entryPoints: ['src/index.ts'],
     outdir: 'dist',
