@@ -1,0 +1,2 @@
+#!/usr/bin/env node
+import{createChangeset as n}from"../scripts/index.js";import c from"chalk";import{readFileSync as s}from"fs";import p from"inquirer";import{resolve as i}from"path";const g=async()=>{const o=i(process.cwd(),"package.json"),e=JSON.parse(s(o,"utf-8")),r=e.name,t=e.version,a=c.green(`${r}@v${t}`),{bump:m}=await p.prompt([{type:"list",name:"bump",message:`Select a bump type for ${a}:`,choices:["patch","minor","major"]}]);await n(m)};g();
